@@ -3,6 +3,7 @@ package com.taxcalc.employee.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -13,8 +14,27 @@ public class Employee {
     private int empId;
     private String firstName;
     private String lastName;
-    private String phnNo;
+    @OneToMany(mappedBy = "employee",cascade = {CascadeType.ALL})
+    private List<MobileNo> phnNo;
     private Date doj;
+
+    public List<MobileNo> getPhnNo() {
+        return phnNo;
+    }
+
+    public void setPhnNo(List<MobileNo> phnNo) {
+        this.phnNo = phnNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
     private double salary;
 
     public int getEmpId() {
@@ -41,13 +61,9 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getPhnNo() {
-        return phnNo;
-    }
 
-    public void setPhnNo(String phnNo) {
-        this.phnNo = phnNo;
-    }
+
+
 
     public Date getDoj() {
         return doj;
